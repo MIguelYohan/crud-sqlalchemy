@@ -1,2 +1,5 @@
-# Mini Menu de CRUD para SQLAlchemy
-# CRUD de Usuarios, guardando os dados em um banco de dados MySQL usando SQLAlchemy
+import gui
+
+if __name__ == '__main__':
+    gui.menu()
+    
