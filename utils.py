@@ -15,11 +15,17 @@ def create_tables():
 def create_user():
     name = input("Nome: ").strip()
     email = input("Email: ").strip()
-    
-    u = User(name, email)
-    with Session() as session:
-        session.add(u)
-        session.commit()
+    if name and email:
+        u = User(name, email)
+        with Session() as session:
+            user = session.query(User).filter_by(email= email).first()
+            if user:
+                return -1
+            session.add(u)
+            session.commit()
+            return True
+    else:
+        return False
 
 
 def create_task():
@@ -28,12 +34,20 @@ def create_task():
 
     t = Task(title, user_id)
     with Session() as session:
-        session.add(t)
-        session.commit()
+        user = session.query(User).filter_by(id= user_id).first()
+        if user:
+            session.add(t)
+            session.commit()
+            return True
+        else:
+            return False
 
 
 def list_tasks():
-    user_id = int(input("ID: "))
+    try:
+        user_id = int(input("ID: "))
+    except ValueError:
+        return False
     with Session() as session:
         user = session.query(User).filter_by(id = user_id).first()
         if user:

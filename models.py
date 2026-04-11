@@ -7,7 +7,7 @@ class User(Base):
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String(50), nullable=False)
-    email = Column(String(50), nullable=False)
+    email = Column(String(50), nullable=False, unique= True)
     is_online = Column(Boolean)
 
     # Relation Ship garante a interação entre dois objetos no Python
@@ -22,7 +22,7 @@ class User(Base):
         return value
     
     @validates("email")
-    def validate_name(self, key, value):
+    def validate_email(self, key, value):
         if not value or value.strip() == '':
             raise ValueError("Column email cannot be null")
         return value

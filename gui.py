@@ -7,6 +7,32 @@ def clear_terminal():
     os.system('cls' if os.name == 'nt' else 'clear')
 
 
+def create_user():
+    res = utils.create_user()
+    if res == -1:
+        print("Você já possui um usuário com esse email.")
+    elif res:
+        print("Usuário criado.")
+    else:
+        print("Nome e email não podem ser nulos.")
+
+
+def delete_user():
+    res = utils.delete_user()
+    if res:
+        print("Usuário deletado.")
+    else:
+        print("Usuário não existe.")
+
+
+def create_task():
+    res = utils.create_task()
+    if res:
+        print("Task criada.")
+    else:
+        print("Usuario não existe.")
+
+
 def update():
     print("1 - Atualizar email")
     print("2 - Atualizar nome")
@@ -55,10 +81,10 @@ def menu():
     funcs = {
             "1": ("Listar funcionários", show_users),
             "2": ("Listar tasks", show_tasks),
-            "3": ("Criar funcionário", utils.create_user),
+            "3": ("Criar funcionário", create_user),
             "4": ("Atualizar dados", update),
-            "5": ("Criar tarefa", utils.create_task),
-            "6": ("Deletar usuário", utils.delete_user),
+            "5": ("Criar tarefa", create_task),
+            "6": ("Deletar usuário", delete_user),
             "7": ("Sair", None)
         }
     
